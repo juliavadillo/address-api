@@ -27,13 +27,8 @@ public class AddressService {
     return AddressResponse.valueOf(addressRepository.save(address));
   }
 
-  private boolean needToGetGeocodingInfo(AddressRequest addressRequest) {
-    return !StringUtils.hasText(addressRequest.getLatitude()) & !StringUtils.hasText(addressRequest.getLongitude());
-  }
-
   public List<AddressResponse> getAllAddress() {
-    List<AddressResponse> addresses = addressRepository.findAll().stream().map(AddressResponse::valueOf).collect(Collectors.toList());
-    return addresses;
+    return addressRepository.findAll().stream().map(AddressResponse::valueOf).collect(Collectors.toList());
   }
 
   public AddressResponse getAddressById(Integer id) {
@@ -62,5 +57,9 @@ public class AddressService {
       throw new EntityNotFoundException();
     }
     addressRepository.delete(address.get());
+  }
+
+  private boolean needToGetGeocodingInfo(AddressRequest addressRequest) {
+    return !StringUtils.hasText(addressRequest.getLatitude()) & !StringUtils.hasText(addressRequest.getLongitude());
   }
 }
