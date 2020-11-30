@@ -1,13 +1,23 @@
 package com.service.address.business;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
+import java.util.LinkedHashMap;
+import lombok.Getter;
+import lombok.Setter;
 
+@Getter
+@Setter
 public class GeoCodingResult {
   @JsonProperty(value = "formatted_address")
   String formattedAddress;
 
-  @JsonProperty("place_id")
-  String placeId;
+
+  @JsonProperty("geometry")
+  LinkedHashMap geometry;
+
+
+
+
 
   public String getFormattedAddress() {
     return formattedAddress;
@@ -17,16 +27,9 @@ public class GeoCodingResult {
     this.formattedAddress = formattedAddress;
   }
 
-  public String getPlaceId() {
-    return placeId;
-  }
-
-  public void setPlaceId(String placeId) {
-    this.placeId = placeId;
-  }
 
   @Override
   public String toString() {
-    return "GeoCodingResult [formattedAddress=" + formattedAddress + ", placeId=" + placeId + "]";
+    return "GeoCodingResult [formattedAddress=" + formattedAddress + ", geometry=" + geometry + "]";
   }
 }
